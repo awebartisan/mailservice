@@ -7,6 +7,7 @@ The mail service is meant to provide a handful of APIs to send all sorts of emai
 This mail service required following dependencies:
 
 - Redis
+- Sqlite3
 - PHP =< 7.2
 - Laravel Lumen
 
