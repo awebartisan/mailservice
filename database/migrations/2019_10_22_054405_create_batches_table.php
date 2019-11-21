@@ -33,3 +33,4 @@ class CreateBatchesTable extends Migration
         Schema::dropIfExists('batches');
     }
 }
+	
