@@ -7,3 +7,4 @@ Homestead.yaml
 log/
 database/database.sqlite
 /storage
+.DS_Store
