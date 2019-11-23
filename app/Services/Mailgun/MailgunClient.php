@@ -50,9 +50,9 @@ class MailgunClient implements MailClient
             $batchMessage->addAttachment($attachment);
         }
 
-        foreach ($message->recipients() as $email => $variables) {
+        foreach ($message->recipients() as $recipient) {
             try {
-                $batchMessage->addToRecipient($email, $variables);
+                $batchMessage->addToRecipient($recipient['email'], Arr::except($recipient, 'email'));
             } catch (TooManyRecipients $exception) {
                 continue;
             }

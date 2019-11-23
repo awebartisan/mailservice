@@ -2,6 +2,7 @@
 
 namespace App\Services\SendGrid;
 
+use Illuminate\Support\Arr;
 use SendGrid\Mail\Attachment;
 use SendGrid\Mail\Mail;
 use App\Services\MailClient;
@@ -63,9 +64,10 @@ class SendGridClient implements MailClient
         $batch->setSubject($message->subject(TemplateFormatter::SENDGRID));
         $batch->addContent('text/plain', $message->body(TemplateFormatter::SENDGRID));
 
-        foreach ($message->recipients() as $email => $substitutions) {
+        foreach ($message->recipients() as $recipient) {
+            $email = $recipient['email'];
             $name = strtok($email, '@');
-            $batch->addTo($email, $name, $this->mapKeys($substitutions));
+            $batch->addTo($email, $name, $this->mapKeys(Arr::except($recipient, 'email')));
         }
 
         foreach ($message->attachments() as $attachment) {

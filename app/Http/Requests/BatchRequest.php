@@ -18,7 +18,6 @@ class BatchRequest
     public function __construct(Request $request)
     {
         Log::debug('payload', $request->all());
-
         $this->request = $request;
 
         $this->validate($this->request, $this->rules());
@@ -65,6 +64,6 @@ class BatchRequest
 
     public function recipients(): array
     {
-        return json_decode($this->request->recipients, true);
+        return $this->request->recipients;
     }
 }

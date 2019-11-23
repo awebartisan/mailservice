@@ -59,10 +59,10 @@ class PepipostClient implements MailClient
     {
         $personalizations = [];
 
-        foreach ($message->recipients() as $email => $attributes) {
+        foreach ($message->recipients() as $recipient) {
             $personalizations[] = [
-                'recipient' => $email,
-                'attributes' => $attributes,
+                'recipient' => $recipient['email'],
+                'attributes' => Arr::except($recipient, 'email'),
                 'x-apiheader' => $message->batchIdentifier(),
             ];
         }
